@@ -1,5 +1,5 @@
 <?php
-
+require __DIR__ . "/../public/index.php";
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
