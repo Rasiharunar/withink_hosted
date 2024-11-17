@@ -1,35 +1,46 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashViewController;
-use App\Http\Controllers\SensorController;
-
-// use App\Http\Controllers\Controller;
-// use App\Http\Controllers\MyController;
-use App\Http\Controllers\RelayViewController;
 use App\Http\Controllers\RelayController;
+use App\Http\Controllers\RelayViewController;
+use App\Http\Controllers\SensorController;
 use App\Http\Controllers\SensorViewController;
-use App\Models\Relay;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-// use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
+// Route untuk halaman utama
 Route::get('/', function () {
-    return view('dashboard');
+    return view('landing');
 });
-Route::get('/dashboard', [DashViewController::class, 'dashView'])->name('dashboard');
-Route::get('/relay', [RelayViewController::class, 'relayView'])->name('relay');
-Route::get('/sensor', [SensorViewController::class, 'sensorView'])->name('sensor');
 
 
-Route::get('/readPln', [SensorController::class, 'readPln']);
-Route::get('/readBatt1', [SensorController::class, 'readBatt1']);
-Route::get('/readBatt2', [SensorController::class, 'readBatt2']);
-Route::get('/readSuhu', [SensorController::class, 'readSuhu']);
+// Route yang membutuhkan autentikasi
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/dashboard', [DashViewController::class, 'dashView'])->name('dashboard');
+    Route::get('/relay', [RelayViewController::class, 'relayView'])->name('relay');
+    Route::get('/sensor', [SensorViewController::class, 'sensorView'])->name('sensor');
 
-Route::get('/simpan/{plnVal}/{batt1Val}/{batt2Val}/{suhuVal}', [SensorController::class, 'simpanSensor']);
+    // Route untuk sensor
+    Route::get('/readKelembapan', [SensorController::class, 'readKelembapan']);
+    Route::get('/readVolumeTanki', [SensorController::class, 'readVolumeTanki']);
+    Route::get('/simpan/{kelembapan}/{volume_tanki}', [SensorController::class, 'simpanSensor']);
 
-Route::post('/control-relay', [RelayController::class, 'controlRelay']);
-Route::get('/get-relay-data', [RelayController::class, 'getRelayData']);
-Route::get('/readRelay1', [RelayController::class, 'readRelay1']);
-Route::get('/readRelay2', [RelayController::class, 'readRelay2']);
+    // Route untuk kontrol relay
+    Route::post('/control-relay', [RelayController::class, 'controlRelay']);
+    Route::get('/get-relay-data', [RelayController::class, 'getRelayData']);
+    Route::get('/readRelay1', [RelayController::class, 'readRelay1']);
+    Route::get('/readRelay2', [RelayController::class, 'readRelay2']);
 
+    // Route untuk profil
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
+// Route untuk logout
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+// Route untuk autentikasi
+require __DIR__.'/auth.php';

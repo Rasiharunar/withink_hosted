@@ -55,26 +55,17 @@ document.addEventListener('DOMContentLoaded', function() {
             fetchRelayData();
 
 
-            $.get("{{ url('readPln') }}", function(data) {
-                $("#pln").text(data.pln);
-                const plnPercentage = (data.pln / data.maxPln) * 100;
-                $("#pln-progress").css("width", plnPercentage + "%");
+            $.get("{{ url('readKelembapan') }}", function(data) {
+                $("#kelembapan").text(data.kelembapan);
+                const kelembapanPercentage = (data.kelembapan / data.maxKelembapan) * 100;
+                $("#kelembapan-progress").css("width", kelembapanPercentage + "%");
             });
-            $.get("{{ url('readBatt1') }}", function(data) {
-                $("#batt1").text(data.batt1);
-                const batt1Percentage = (data.batt1 / data.maxBatt1) * 100;
-                $("#batt1-progress").css("width", batt1Percentage + "%");
+            $.get("{{ url('readVolume_air') }}", function(data) {
+                $("#volume_air").text(data.volume_air);
+                const volume_airPercentage = (data.volume_air / data.maxVolume_air) * 100;
+                $("#volume_air-progress").css("width", volume_airPercentage + "%");
             });
-            $.get("{{ url('readBatt2') }}", function(data) {
-                $("#batt2").text(data.batt2);
-                const batt2Percentage = (data.batt2 / data.maxBatt2) * 100;
-                $("#batt2-progress").css("width", batt2Percentage + "%");
-            });
-            $.get("{{ url('readSuhu') }}", function(data) {
-                $("#suhu").text(data.suhu);
-                const suhuPercentage = (data.suhu / data.maxSuhu) * 100;
-                $("#suhu-progress").css("width", suhuPercentage + "%");
-            });
+
         }, 1000);
     });
 });

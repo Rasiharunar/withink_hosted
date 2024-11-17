@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Relay;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class relayController extends Controller
 {
@@ -10,12 +11,15 @@ class relayController extends Controller
     {
         $relayId = $request->input('relay_id');
         $state = $request->input('state');
-
+        // Ambil relay berdasarkan ID pengguna yang sedang login
+        $user = Auth::user();
+        $relay = Relay::where('user_id', $user->id)->first();
         // Karena hanya ada satu baris data, kita ambil data dengan id 1
-        $relay = Relay::find(1);
+
         if (!$relay) {
             // Jika belum ada data, kita buat baru
             $relay = new Relay();
+            $relay->user_id = $user->id; // Set user_id
         }
 
         if ($relayId == 1) {
@@ -30,8 +34,8 @@ class relayController extends Controller
     public function getRelayData()
     {
         // Retrieve the relay data
-        $relay = Relay::find(1); // Assuming there's only one row with id 1
-
+        $user = Auth::user();
+        $relay = Relay::where('user_id', $user->id)->first();
         // If no data found, create default values
         if (!$relay) {
             $relay = new Relay();
@@ -49,13 +53,15 @@ class relayController extends Controller
     }
     public function readRelay1()
     {
-        $relay = Relay::select('relay1')->first();
-        // $maxBatt1 = 60; // Define the maximum value for Batt1
+        $user = Auth::user();
+        $relay = Relay::where('user_id', $user->id)->first();
         return response()->json(['relay1' => $relay->relay1]);
     }
     public function readRelay2()
     {
-        $relay = Relay::select('relay2')->first();
+        $user = Auth::user();
+        $relay = Relay::where('user_id', $user->id)->first();
+        // $relay = Relay::select('relay2')->first();
         // $maxBatt1 = 60; // Define the maximum value for Batt1
         return response()->json(['relay2' => $relay->relay2]);
     }

@@ -10,5 +10,9 @@ class MSensor extends Model
     use HasFactory;
     protected $table = 'tb_sensor';
     protected $primaryKey = 'id';
-    protected $fillable = ['pln', 'batt1', 'batt2', 'suhu'];
+    protected $fillable = ['user_id','kelembapan', 'volume_tanki'];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

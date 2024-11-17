@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('relays', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Menambahkan foreign key
+
             $table->string('relay1', 1)->default('0');
             $table->string('relay2', 1)->default('0');
             $table->timestamps();

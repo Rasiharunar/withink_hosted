@@ -4,44 +4,54 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MSensor;
+use Illuminate\Support\Facades\Auth;
 
 class SensorController extends Controller
 {
-    // public function readPln(){
-    //     $sensor = MSensor::select('*')->get();
-    //     return view('readPln', ['nilaisensor'=>$sensor]);
-    // }
 
-    public function readPln()
+
+    public function readKelembapan()
     {
-        $sensor = MSensor::select('pln')->first();
-        $maxPln = 280; // Define the maximum value for PLN
-        return response()->json(['pln' => $sensor->pln, 'maxPln' => $maxPln]);
+        $userId = Auth::id();
+
+        // Mengambil kelembapan berdasarkan user_id
+        $sensor = MSensor::where('user_id', $userId)->select('kelembapan')->first();
+
+        // $sensor = MSensor::select('kelembapan')->first();
+        $maxKelembapan = 280; // Define the maximum value for PLN
+        return response()->json(['kelembapan' => $sensor->kelembapan, 'maxKelembapan' => $maxKelembapan]);
     }
 
-    public function readBatt1()
+    public function readVolumeTanki()
     {
-        $sensor = MSensor::select('batt1')->first();
-        $maxBatt1 = 60; // Define the maximum value for Batt1
-        return response()->json(['batt1' => $sensor->batt1, 'maxBatt1' => $maxBatt1]);
+        $userId = Auth::id();
+
+        // Mengambil volume tanki berdasarkan user_id
+        $sensor = MSensor::where('user_id', $userId)->select('volume_tanki')->first();
+        $maxVolumeTanki = 60; // Define the maximum value for Batt1
+
+        return response()->json(['volume_tanki' => $sensor->volume_tanki, 'maxVolumeTanki' => $maxVolumeTanki]);
     }
 
-    public function readBatt2()
+    public function simpanSensor(Request $request)
     {
-        $sensor = MSensor::select('batt2')->first();
-        $maxBatt2 = 60; // Define the maximum value for Batt2
-        return response()->json(['batt2' => $sensor->batt2, 'maxBatt2' => $maxBatt2]);
+        // Validasi input
+        $request->validate([
+            'kelembapan' => 'required|numeric',
+            'volume_tanki' => 'required|numeric',
+        ]);
+
+        // Mendapatkan user yang sedang login
+        $userId = Auth::id();
+
+        // Update data sensor berdasarkan user_id
+        MSensor::where('user_id', $userId)->update([
+            'kelembapan' => $request->kelembapan,
+            'volume_tanki' => $request->volume_tanki,
+        ]);
+
+        return response()->json(['message' => 'Data sensor berhasil diperbarui.']);
     }
 
-    public function readSuhu()
-    {
-        $sensor = MSensor::select('suhu')->first();
-        $maxSuhu = 100; // Define the maximum value for Suhu
-        return response()->json(['suhu' => $sensor->suhu, 'maxSuhu' => $maxSuhu]);
-    }
-
-    public function simpanSensor(){
-        MSensor::where('id','1')->update(['pln'=>request()->plnVal,'batt1'=>request()->batt1Val,'batt2'=>request()->batt2Val,'suhu'=>request()->suhuVal]);
-    }
 
 }

@@ -6417,7 +6417,7 @@ a.close.disabled {
 a.bg-primary:hover, a.bg-primary:focus,
 button.bg-primary:hover,
 button.bg-primary:focus {
-  background-color: #2653d4 !important;
+  background-color: #7fde2a !important;
 }
 
 .bg-secondary {
@@ -10140,6 +10140,10 @@ a:focus {
   font-weight: 900;
   content: '\f105';
   font-family: 'Font Awesome 5 Free';
+}
+.custom-topbar {
+            background-color: #87ceeb; /* Ganti dengan warna yang Anda inginkan */
+            color: white; /* Ganti warna teks jika perlu */
 }
 
 .sidebar .nav-item.dropdown.show .dropdown-toggle::after,
