@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>WiThing</title>
+        <title>WiThink</title>
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <link href="{{ asset('sbadmin/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">

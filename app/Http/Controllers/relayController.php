@@ -5,7 +5,7 @@ use App\Models\Relay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class relayController extends Controller
+class RelayController extends Controller
 {
     public function controlRelay(Request $request)
     {
@@ -50,6 +50,29 @@ class relayController extends Controller
             'relay2' => $relay->relay2,
         ]);
 
+    }
+    public function getRelayDataEsp(Request $request)
+    {
+        $deviceId = $request->input('deviceid');
+
+    // Temukan relay berdasarkan device_id
+        $relay = Relay::where('id', $deviceId)->first();
+
+        $relay = Relay::find(1);
+        // Jika tidak ada data relay, buat data default
+        if (!$relay) {
+            $relay = new Relay();
+            // $relay->user_id = $user->id; // Set user_id
+            $relay->relay1 = '0';
+            $relay->relay2 = '0';
+            $relay->save();
+        }
+
+        // Kembalikan data relay sebagai JSON
+        return response()->json([
+            'relay1' => $relay->relay1,
+            'relay2' => $relay->relay2,
+        ]);
     }
     public function readRelay1()
     {

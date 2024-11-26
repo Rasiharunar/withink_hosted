@@ -2,25 +2,20 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}" class="bg-light-400 p-6 rounded-lg shadow-md">
+    <form method="POST" action="{{ route('login') }}" class="bg-transparent p-6 rounded-lg shadow-none">
         @csrf
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" class="text-customBlue" /> <!-- Ubah warna teks di sini -->
+            <x-input-label for="email" :value="__('Email')" class="text-customBlue" />
             <x-text-input id="email" class="block mt-1 w-full bg-light border border-light-300 focus:border-light-500 focus:ring focus:ring-light-500" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2 text-light" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" class="text-customBlue" /> <!-- Ubah warna teks di sini -->
-
-            <x-text-input id="password" class="block mt-1 w-full bg-light border border-light-300 focus:border-light-500 focus:ring focus:ring-light-500"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
+            <x-input-label for="password" :value="__('Password')" class="text-customBlue" />
+            <x-text-input id="password" class="block mt-1 w-full bg-light border border-light-300 focus:border-light-500 focus:ring focus:ring-light-500" type="password" name="password" required autocomplete="current-password" />
             <x-input-error :messages="$errors->get('password')" class="mt-2 text-light" />
         </div>
 

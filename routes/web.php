@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('landing');
 });
 
-
+Route::get('/esp/get-relay-data-esp/{deviceid}', [RelayController::class, 'getRelayDataEsp']);
 // Route yang membutuhkan autentikasi
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashViewController::class, 'dashView'])->name('dashboard');
@@ -28,8 +28,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/simpan/{kelembapan}/{volume_tanki}', [SensorController::class, 'simpanSensor']);
 
     // Route untuk kontrol relay
-    Route::post('/control-relay', [RelayController::class, 'controlRelay']);
-    Route::get('/get-relay-data', [RelayController::class, 'getRelayData']);
+    Route::post('/control-relay', [RelayController::class, 'controlRelay'])->name('control-relay');
+    Route::get('/get-relay-data', [RelayController::class, 'getRelayData'])->name('get-relay-data');
     Route::get('/readRelay1', [RelayController::class, 'readRelay1']);
     Route::get('/readRelay2', [RelayController::class, 'readRelay2']);
 
