@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MSensor;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class SensorController extends Controller
@@ -33,25 +34,27 @@ class SensorController extends Controller
         return response()->json(['volume_tanki' => $sensor->volume_tanki, 'maxVolumeTanki' => $maxVolumeTanki]);
     }
 
-    public function simpanSensor(Request $request)
+      public function simpanSensor($deviceCode, $kelembapan, $volume_tanki)
     {
         // Validasi input
-        $request->validate([
-            'kelembapan' => 'required|numeric',
-            'volume_tanki' => 'required|numeric',
-        ]);
+        if (!is_numeric($kelembapan) || !is_numeric($volume_tanki)) {
+            return response()->json(['message' => 'Kelembapan dan volume_tanki harus berupa angka.'], 400);
+        }
+        $user = User::where('device_code', $deviceCode)->first();
 
-        // Mendapatkan user yang sedang login
-        $userId = Auth::id();
+        // Cek apakah ada data sensor yang sesuai dengan user_id
+        $sensor = MSensor::where('user_id', $user->id)->first();
+
+        if (!$sensor) {
+            return response()->json(['message' => 'Data sensor tidak ditemukan.'], 404);
+        }
 
         // Update data sensor berdasarkan user_id
-        MSensor::where('user_id', $userId)->update([
-            'kelembapan' => $request->kelembapan,
-            'volume_tanki' => $request->volume_tanki,
+        $sensor->update([
+            'kelembapan' => $kelembapan,
+            'volume_tanki' => $volume_tanki,
         ]);
 
         return response()->json(['message' => 'Data sensor berhasil diperbarui.']);
     }
-
-
 }

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Support\Str;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -21,6 +21,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'device_code',
     ];
 
     /**
@@ -45,4 +46,28 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Event to generate a unique device_code before creating a user
+        static::creating(function ($user) {
+            $user->device_code = self::generateUniqueDeviceCode();
+        });
+    }
+
+    /**
+     * Generate a unique device code.
+     *
+     * @return string
+     */
+    private static function generateUniqueDeviceCode()
+    {
+        do {
+            $code = Str::random(10); // Generate a random string with 10 characters
+        } while (self::where('device_code', $code)->exists()); // Check for uniqueness
+
+        return $code;
+    }
+
 }

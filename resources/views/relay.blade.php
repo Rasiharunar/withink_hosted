@@ -123,7 +123,7 @@
                 setInterval(function() {
                     fetchRelayData();
 
-                }, 1000);
+                }, 500);
             });
         });
     </script>
@@ -143,7 +143,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-primary sidebar sidebar-dark accordion" id="accordionSidebar">
                 <hr class="sidebar-divider my-0">
                 <li class="nav-item active">
                     <a class="nav-link" href="{{route('dashboard')}}">

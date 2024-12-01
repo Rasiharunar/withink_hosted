@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Models\Relay;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class relayController extends Controller
+class RelayController extends Controller
 {
     public function controlRelay(Request $request)
     {
@@ -51,6 +52,27 @@ class relayController extends Controller
         ]);
 
     }
+    public function getRelayDataEsp($deviceCode)
+    {
+        $user = User::where('device_code', $deviceCode)->first();
+
+
+    $relay = Relay::where('user_id', $user->id)->first();
+
+
+    if ($relay === null) {
+        // Return an error response if no relay is found
+        return response()->json(['error' => 'Relay not found'], 404);
+    }
+
+    // Return relay data as JSON
+    return response()->json([
+        'relay1' => $relay->relay1,
+        'relay2' => $relay->relay2,
+    ]);
+    }
+
+
     public function readRelay1()
     {
         $user = Auth::user();

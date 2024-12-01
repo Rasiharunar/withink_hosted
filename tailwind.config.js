@@ -15,10 +15,10 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                primary: '#4e73df', // Ganti dengan warna yang Anda inginkan
-                secondary: '#4e73df', // Ganti dengan warna yang Anda inginkan
+                primary: '#52e4cb', // Ganti dengan warna yang Anda inginkan
+                secondary: '#52e4cb', // Ganti dengan warna yang Anda inginkan
                 light: '#f8f9fc',
-                customBlue: '#1d4ed8',
+                customBlue: '#52e4cb',
                 // Tambahkan warna lain sesuai kebutuhan
               },
         },

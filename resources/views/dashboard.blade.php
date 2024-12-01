@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>WiThing</title>
+        <title>WiThink</title>
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <link href="{{ asset('sbadmin/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -19,7 +19,7 @@
 
     <body id="page-top">
         <div id="wrapper">
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <ul class="navbar-nav bg-primary sidebar sidebar-dark accordion" id="accordionSidebar">
                 <hr class="sidebar-divider my-0">
                 <li class="nav-item active">
                     <a class="nav-link" href="{{route('dashboard')}}">
@@ -62,11 +62,34 @@
                                                 <div class="text-l font-weight-bold text-info text-uppercase mb-1">User  Profile</div>
                                                 <div class="text-s font-weight-bold text-gray-500 mb-1">Name: {{ Auth::user()->name }}</div>
                                                 <div class="text-s font-weight-bold text-gray-500 mb-1">Email: {{ Auth::user()->email }}</div>
+
+                                                <div class="text-s font-weight-bold text-gray-500 mb-1">device code: {{ Auth::user()->device_code }}</div>
                                                 <div class="text-s font-weight-bold text-gray-500 mb-1">Joined: {{ Auth::user()->created_at->format('d M Y') }}</div>
                                                 <div class="row no-gutters align-items-center mt-2">
                                                     <div class="col">
                                                         <a href="{{ route('profile.edit') }}" class="btn btn-info btn-block">Edit Profile</a>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-info shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-l font-weight-bold text-info text-uppercase mb-1">Device Profile</div>
+
+
+                                                <div class="text-s font-weight-bold text-gray-500 mb-1">device code: {{ Auth::user()->device_code }}</div>
+                                                <br>
+                                                <div class="text-s font-weight-bold text-gray-500 mb-1">Joined: {{ Auth::user()->created_at->format('d M Y') }}</div>
+                                                <div class="row no-gutters align-items-center mt-2">
+                                                    <!-- <div class="col">
+                                                        <a href="{{ route('profile.edit') }}" class="btn btn-info btn-block">Edit Profile</a>
+                                                    </div> -->
                                                 </div>
                                             </div>
                                         </div>

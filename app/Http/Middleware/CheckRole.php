@@ -1,5 +1,7 @@
 <?php
 
+// app/Http/Middleware/CheckRole.php
+
 namespace App\Http\Middleware;
 
 use Closure;
@@ -8,22 +10,21 @@ use Illuminate\Support\Facades\Auth;
 
 class CheckRole
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string  $role
-     * @return mixed
-     */
-    public function handle(Request $request, Closure $next, $role)
-    {
-        // Memeriksa apakah pengguna terautentikasi dan memiliki peran yang sesuai
-        if (!Auth::check() || Auth::user()->role !== $role) {
-            // Jika tidak, redirect ke halaman login atau halaman lain
-            return redirect()->route('login')->with('error', 'You do not have access to this page.');
+    public function handle(Request $request, Closure $next)
+{
+    // Memeriksa apakah pengguna terautentikasi
+    if (Auth::check()) {
+        if (Auth::user()->role == 'admin') {
+            // Izinkan akses ke rute admin.dashboard dan admin.edit
+            if (!$request->routeIs('admin.dashboard') && !$request->routeIs('admin.edit')) {
+                return redirect()->route('admin.dashboard');
+            }
+        } elseif (Auth::user()->role == 'user' && !$request->routeIs('dashboard')) {
+            return redirect()->route('dashboard');
         }
-
-        return $next($request);
     }
+
+    // Jika tidak ada peran yang cocok, lanjutkan permintaan
+    return $next($request);
+}
 }

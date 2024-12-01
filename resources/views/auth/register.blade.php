@@ -43,7 +43,6 @@
             <select id="role" name="role" class="block mt-1 w-full" required>
                 <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User </option>
                 <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                <option value="editor" {{ old('role') == 'editor' ? 'selected' : '' }}>Editor</option>
                 <!-- Tambahkan role lain sesuai kebutuhan -->
             </select>
             <x-input-error :messages="$errors->get('role')" class="mt-2" />
@@ -51,7 +50,7 @@
 
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
+            <a class="underline text-sm text-white dark:text-white hover:text-white-900 dark:hover:text-white-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-white-800" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
             </a>
 

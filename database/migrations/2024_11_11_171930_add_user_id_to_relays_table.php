@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('relays', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained()->onDelete('cascade')->after('id');
-
-        });
+        if (!Schema::hasColumn('relays', 'user_id')) {
+            Schema::table('relays', function (Blueprint $table) {
+                $table->unsignedBigInteger('user_id')->after('id')->nullable(false);
+            });
+        }
     }
 
     /**
