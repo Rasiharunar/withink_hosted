@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -68,3 +69,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 =======
 # WiThink_IoT
 >>>>>>> 9c61a9284f25a4a7a3de4ee4859f96e09b10bebc
+=======
+# withink_hosted
+withink-hostinger
+>>>>>>> 17046abe0f30a026e38a9cd994001e2983516e87
