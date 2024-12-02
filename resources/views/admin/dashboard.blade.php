@@ -1,4 +1,25 @@
 <x-app-layout>
+    <div id="wrapper">
+
+    <ul class="navbar-nav bg-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <hr class="sidebar-divider my-0">
+
+
+        <li class="nav-item active">
+            <a class="nav-link" href="{{route('admin.dashboard')}}">
+                <i class="fas fa-fw fa-server"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <hr class="sidebar-divider">
+        <li class="nav-item active">
+            <a class="nav-link" href="{{route('admin.edit')}}">
+                <i class="fas fa-fw fa-toggle-on"></i>
+                <span>Edit User</span>
+            </a>
+        </li>
+        <hr class="sidebar-divider">
+    </ul>
     <div id="content-wrapper" class="d-flex flex-column">
         <div id="content">
             <div class="container-fluid">
@@ -32,6 +53,9 @@
             </div>
 
         </div>
+        </div>
+    </div>
+        </div>
 
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
@@ -40,8 +64,8 @@
                 </div>
             </div>
         </footer>
-    </div>
-    <!-- </div> -->
+    <!-- </div>
+    </div> -->
 
     <script src="{{ asset('sbadmin/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{ asset('sbadmin/vendor/jquery-easing/jquery.easing.min.js')}}"></script>

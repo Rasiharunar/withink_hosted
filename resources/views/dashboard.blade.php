@@ -100,11 +100,13 @@
                         <!-- /.container-fluid -->
                     </div>
                 </div>
+            </div>
+        </div>
 
                 <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
+                    <div class="container my-4">
                         <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2021</span>
+                            <span>withink iot 2024</span>
                         </div>
                     </div>
                 </footer>

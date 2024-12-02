@@ -15,16 +15,7 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>
-        /* Inline style for responsive background image */
-        body {
-            background-image: url('path/to/your/image.jpg'); /* Replace with your image URL */
-            background-size: cover; /* Cover the entire area */
-            background-position: center; /* Center the image */
-            background-repeat: no-repeat; /* Prevent the image from repeating */
-            height: 100vh; /* Make sure the body takes up the full height of the viewport */
-        }
-    </style>
+
 </head>
 
 <body class="font-sans text-customBlue ">

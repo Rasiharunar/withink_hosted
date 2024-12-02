@@ -49,6 +49,9 @@
                                         <a href="{{ route('login') }}" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </a>
+                                        <a href="{{ route('admin_verification') }}" class="btn btn-primary btn-user btn-block">
+                                            admin register
+                                        </a>
 
                                     </form>
 

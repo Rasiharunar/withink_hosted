@@ -1,13 +1,13 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+<nav x-data="{ open: false }" class="bg-secondary dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mt-0 px-5 sm:px-16 lg:px-8">
+    <div class="max-w-7xl mt-0 px-5 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex items-center">
                 <!-- Logo -->
                 @if(Auth::user()->role === 'user')
-                <a class="sidebar-brand d-flex align-items-left justify-start bg-gray-300 p-1 rounded-lg" href="{{ route('dashboard') }}">
-                    <div class="sidebar-brand-text mx-1">WiThink</div>
-                </a>
+                <h2 class="font-semibold text-xl text-gray-100 dark:text-gray-200 leading-tight">
+            {{ __('WiThink') }}
+        </h2>
                 @endif
                 @if(Auth::user()->role === 'admin')
                 <a class="sidebar-brand d-flex align-items-center justify-content-center bg-gray-300 p-1 rounded-lg" href="{{ route('admin.dashboard') }}">
@@ -22,7 +22,7 @@
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-100 bg-secondary dark:bg-gray-100 hover:text-gray-100 dark:hover:text-gray-100 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -95,30 +95,9 @@
             </div>
         </div>
     </div>
-</nav>@if(Auth::user()->role === 'admin') <!-- Pastikan 'role' sesuai dengan kolom di database Anda -->
-
-<div id="wrapper">
-
-    <ul class="navbar-nav bg-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-        <hr class="sidebar-divider my-0">
+</nav>
 
 
-        <li class="nav-item active">
-            <a class="nav-link" href="{{route('admin.dashboard')}}">
-                <i class="fas fa-fw fa-server"></i>
-                <span>Dashboard</span>
-            </a>
-        </li>
-        <hr class="sidebar-divider">
-        <li class="nav-item active">
-            <a class="nav-link" href="{{route('admin.edit')}}">
-                <i class="fas fa-fw fa-toggle-on"></i>
-                <span>Edit User</span>
-            </a>
-        </li>
-        <hr class="sidebar-divider">
-        @endif
-    </ul>
 
 
     <!-- </div> -->

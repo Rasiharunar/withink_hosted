@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\adminDash;
+use App\Http\Controllers\AdminRegister;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashViewController;
@@ -19,6 +20,11 @@ Route::get('/', function () {
     return view('landing');
 });
 
+Route::post('/validate-admin-code', [AdminRegister::class, 'validateAdminCode'])->name('validate_admin_code');
+Route::get('/admin/register', [AdminRegister::class, 'admin_reg'])->name('admin_register');
+
+Route::get('/admin/adminCode', [AdminRegister::class, 'admin_code'])->name('admin_verification');
+
 Route::get('/esp/simpan/{deviceCode}/{kelembapan}/{volume_tanki}', [SensorController::class, 'simpanSensor']);
 
 Route::get('/esp/get-relay-data-esp/{deviceCode}', [RelayController::class, 'getRelayDataEsp'])->name('get-relay-data-esp');
@@ -31,13 +37,14 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin']], function (){
     Route::get('/admin/edit', [editView::class, 'editView'])
     ->name('admin.edit')
     ->middleware(CheckRole::class);
-    Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])
-    ->name('admin.destroy'); // Menambahkan rute ini
-    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    // Route::get('/admin/edit/{user}', [UserController::class, 'edit'])->name('admin.edit')->middleware(CheckRole::class);;
+    Route::post('/admin/edit/{user}', [UserController::class, 'update'])->name('admin.update')->middleware(CheckRole::class);;
+    // Route::delete('/admin/edit/{user}', [UserController::class, 'destroy'])->name('users.destroy'); // Menambahkan rute ini
+    // Route::get('/admin/edit/{user}', [UserController::class, 'update'])->name('users.edit');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.destroy')->middleware(CheckRole::class);;
 
 });
-// Route yang membutuhkan autentikasi
+// Route yang membutuhkan autentikasis
 Route::group(['middleware' => ['auth']], function (){
 
     Route::get('/dashboard', [DashViewController::class, 'dashView'])->name('dashboard');

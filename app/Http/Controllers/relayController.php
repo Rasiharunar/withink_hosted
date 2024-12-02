@@ -52,6 +52,7 @@ class RelayController extends Controller
         ]);
 
     }
+
     public function getRelayDataEsp($deviceCode)
     {
         $user = User::where('device_code', $deviceCode)->first();
@@ -71,6 +72,9 @@ class RelayController extends Controller
         'relay2' => $relay->relay2,
     ]);
     }
+
+
+
 
 
     public function readRelay1()

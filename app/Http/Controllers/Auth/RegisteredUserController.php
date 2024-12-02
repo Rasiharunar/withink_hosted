@@ -46,7 +46,7 @@ class RegisteredUserController extends Controller
             'role' => $request->role, // Menyimpan role pengguna
 
         ]);
-
+        if ($request->role !== 'admin') {
         MSensor::create([
             'user_id' => $user->id, // Menyimpan ID pengguna
             'kelembapan' => '0.0', // Ganti dengan nilai default yang Anda inginkan
@@ -59,11 +59,11 @@ class RegisteredUserController extends Controller
             'relay1' => '0', // Nilai default untuk relay1
             'relay2' => '0', // Nilai default untuk relay2
         ]);
-
+    }
         event(new Registered($user));
 
-        Auth::login($user);
+        // Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect()->route('login')->with('success', 'Registration successful! Please log in.');
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MSensor;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class SensorController extends Controller
@@ -40,10 +39,10 @@ class SensorController extends Controller
         if (!is_numeric($kelembapan) || !is_numeric($volume_tanki)) {
             return response()->json(['message' => 'Kelembapan dan volume_tanki harus berupa angka.'], 400);
         }
-        $user = User::where('device_code', $deviceCode)->first();
+         $user = User::where('device_code', $deviceCode)->first();
 
         // Cek apakah ada data sensor yang sesuai dengan user_id
-        $sensor = MSensor::where('user_id', $user->id)->first();
+        $sensor = MSensor::where('user_id', $deviceCode)->first();
 
         if (!$sensor) {
             return response()->json(['message' => 'Data sensor tidak ditemukan.'], 404);
